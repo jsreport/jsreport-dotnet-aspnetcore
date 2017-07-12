@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <PackageId>jsreport.MVC</PackageId>
+    <Title>jsreport asp.net mvc integration</Title>
+    <Authors>Jan Blaha</Authors>
+    <Description>Pdf rendering from asp.net views using jsreport.</Description>
+    <PackageProjectUrl>http://jsreport.net</PackageProjectUrl>
+    <PackageLicenseUrl>http://www.opensource.org/licenses/mit-license.php</PackageLicenseUrl>
+    <PackageIconUrl>http://jsreport.net/img/favicon.ico</PackageIconUrl>
+    <Copyright>Copyright 2013-2017 Jan Blaha</Copyright>
+    <PackageTags>jsreport;report;pdf;asp.net;mvc</PackageTags>
+    <RepositoryUrl>https://github.com/jsreport/net</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0-preview2-final" />    
+  </ItemGroup>
+
+  <Choose>
+    <When Condition=" '$(SolutionName)' == 'jsreport.development' ">
+      <ItemGroup>
+        <ProjectReference Include="..\..\jsreport-dotnet-types\jsreport.Types\jsreport.Types.csproj" />        
+        <ProjectReference Include="..\..\jsreport-dotnet-shared\jsreport.Shared\jsreport.Shared.csproj" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <PackageReference Include="jsreport.Types" Version="1.0.0" />
+        <PackageReference Include="jsreport.Shared" Version="1.0.0" />        
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+
+</Project>
