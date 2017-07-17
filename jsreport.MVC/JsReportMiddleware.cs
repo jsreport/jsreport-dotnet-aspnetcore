@@ -18,9 +18,10 @@ namespace jsreport.MVC
         }
 
         public async Task Invoke(HttpContext context)
-        {        
+        {
+            // put to the Response.Body our own stream so we can later forward the underlying buffer to jsreport
             var buffer = new MemoryStream();
-            var stream = context.Response.Body;
+            var originalResponseStream = context.Response.Body;
             context.Response.Body = buffer;
 
             context.Features.Set<IJsReportFeature>(new JsReportFeature(context));
@@ -31,10 +32,11 @@ namespace jsreport.MVC
 
                 var feature = context.Features.Get<IJsReportFeature>();
 
+                // we don't deal with failed request and let the other middlewares handle it
                 if (!feature.Enabled || context.Response.StatusCode != 200)
                 {
                     buffer.Seek(0, SeekOrigin.Begin);
-                    await buffer.CopyToAsync(stream);
+                    await buffer.CopyToAsync(originalResponseStream);
                     return;
                 }
 
@@ -49,12 +51,13 @@ namespace jsreport.MVC
                 context.Response.Headers["Content-Disposition"] = report.Meta.ContentDisposition;
 
                 feature.AfterRender?.Invoke(report);
-
-                await report.Content.CopyToAsync(stream);
+                                
+                await report.Content.CopyToAsync(originalResponseStream);
             }
             finally
             {
-                context.Response.Body = stream;
+                // finally copy the jsreport output stream to the Response.Body
+                context.Response.Body = originalResponseStream;
             }
         }
     }

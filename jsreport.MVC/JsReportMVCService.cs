@@ -53,7 +53,7 @@ namespace jsreport.MVC
             return _renderService.RenderByNameAsync(templateName, data, ct);
         }
 
-        public async Task<Report> RenderViewAsync(HttpContext context, RouteData routeData, string viewName, object model, RenderRequest renderRequest)
+        public async Task<Report> RenderViewAsync(HttpContext context, RenderRequest renderRequest, RouteData routeData, string viewName, object model)
         {
             var str = await RenderViewToStringAsync(context, routeData, viewName, model);
             renderRequest.Template.Content = str;
