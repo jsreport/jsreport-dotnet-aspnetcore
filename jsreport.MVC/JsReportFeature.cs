@@ -10,7 +10,7 @@ namespace jsreport.MVC
         bool Enabled { get; set; }
         IJsReportFeature Configure(Action<RenderRequest> req);
         HttpContext Context { get; set; }        
-        IJsReportFeature Debug();
+        IJsReportFeature DebugLogsToResponse();
         IJsReportFeature NoBaseTag();
         IJsReportFeature Engine(Engine engine);
         IJsReportFeature Recipe(Recipe recipe);        
@@ -23,11 +23,7 @@ namespace jsreport.MVC
         public JsReportFeature(HttpContext context)
         {
             RenderRequest = new RenderRequest();
-            RenderRequest.Template.Engine = Types.Engine.None;
-            RenderRequest.Options.Debug = new DebugOptions()
-            {
-                LogsToResponseHeader = true
-            };
+            RenderRequest.Template.Engine = Types.Engine.None;            
             Context = context;
             RenderRequest.Options.Base = $"{Context.Request.Scheme}://{Context.Request.Host}";
             Enabled = true;
@@ -63,7 +59,7 @@ namespace jsreport.MVC
             return this;
         }        
 
-        public IJsReportFeature Debug()
+        public IJsReportFeature DebugLogsToResponse()
         {
             RenderRequest.Options.Debug.LogsToResponse = true;
             return this;
