@@ -21,6 +21,7 @@
         <ProjectReference Include="..\..\jsreport-dotnet-shared\jsreport.Shared\jsreport.Shared.csproj" />
         <ProjectReference Include="..\..\jsreport-dotnet-client\jsreport.Client\jsreport.Client.csproj" />
         <ProjectReference Include="..\..\jsreport-dotnet-local\jsreport.Local\jsreport.Local.csproj" />
+        <ProjectReference Include="..\..\jsreport-dotnet-binary\jsreport.Binary\jsreport.Binary.csproj" />
         <ProjectReference Include="..\..\jsreport-dotnet-mvc\jsreport.MVC\jsreport.MVC.csproj" />
       </ItemGroup>
     </When>
@@ -30,6 +31,7 @@
         <PackageReference Include="jsreport.Client" Version="1.0.0" />
         <PackageReference Include="jsreport.Shared" Version="1.0.0" />
         <PackageReference Include="jsreport.Local" Version="1.0.0" />
+        <PackageReference Include="jsreport.Binary" Version="1.0.0" />
         <PackageReference Include="jsreport.MVC" Version="1.0.0" />
       </ItemGroup>
     </Otherwise>

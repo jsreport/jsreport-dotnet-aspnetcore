@@ -1,3 +1,4 @@
+using jsreport.Binary;
 using jsreport.Local;
 using jsreport.Types;
 using Microsoft.AspNetCore.Http;
@@ -17,7 +18,7 @@ namespace jsreport.MVC.Test
         {            
             var context = new DefaultHttpContext();
             context.Response.Body = new MemoryStream();
-            var rs = new LocalReporting().AsUtility().Create();
+            var rs = new LocalReporting().UseBinary(JsReportBinary.GetStream()).AsUtility().Create();
 
             var rd = new RequestDelegate(async (ctx) =>
             {

@@ -3,5 +3,5 @@
 
 This package includes the asp.net core filters, pipelines and mvc helper functions enabling usage of Razor views for rendering reports.
 
-You can find link to docs and further navigation across the .net repositories here
-https://github.com/jsreport/jsreport-dotnet
+You can find examples and documentation in the [jsreport sdk for .net home page](https://jsreport.net/learn/dotnet).
+The general development and contribution instructions can be find in the [jsreport for .net  root repository](https://github.com/jsreport/jsreport-dotnet).
