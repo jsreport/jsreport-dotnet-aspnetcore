@@ -18,7 +18,7 @@ namespace jsreport.MVC.Test
         {            
             var context = new DefaultHttpContext();
             context.Response.Body = new MemoryStream();
-            var rs = new LocalReporting().UseBinary(JsReportBinary.GetStream()).AsUtility().Create();
+            var rs = new LocalReporting().UseBinary(JsReportBinary.GetBinary()).AsUtility().Create();
 
             var rd = new RequestDelegate(async (ctx) =>
             {
