@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace jsreport.MVC
+namespace jsreport.AspNetCore
 {
     public class JsReportMiddleware
     {

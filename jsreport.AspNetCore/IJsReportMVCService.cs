@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using System.Threading.Tasks;
 
-namespace jsreport.MVC
+namespace jsreport.AspNetCore
 {
     /// <summary>
     /// jsreport rendering service which additionally provides methods to render particular view.

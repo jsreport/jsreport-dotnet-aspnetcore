@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 
-namespace jsreport.MVC
+namespace jsreport.AspNetCore
 {
     public class JsReportPipeline
     {

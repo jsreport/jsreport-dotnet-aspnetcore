@@ -1,7 +1,7 @@
 ﻿using jsreport.Shared;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace jsreport.MVC
+namespace jsreport.AspNetCore
 {
     public static class JsReportServicesExtensions
     {

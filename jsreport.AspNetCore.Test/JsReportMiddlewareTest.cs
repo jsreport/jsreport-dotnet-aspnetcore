@@ -8,7 +8,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace jsreport.MVC.Test
+namespace jsreport.AspNetCore.Test
 {
     [TestFixture]
     public class JsReportMiddlewareTest

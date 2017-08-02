@@ -13,7 +13,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace jsreport.MVC
+namespace jsreport.AspNetCore
 {
     public class JsReportMVCService : IJsReportMVCService
     {

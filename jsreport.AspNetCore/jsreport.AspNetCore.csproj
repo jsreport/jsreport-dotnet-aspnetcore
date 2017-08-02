@@ -2,21 +2,21 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>jsreport.MVC</PackageId>
+    <PackageId>jsreport.AspNetCore</PackageId>
     <Title>jsreport asp.net core and MVC integration</Title>
     <Authors>Jan Blaha</Authors>
-    <Description>Pdf rendering from asp.net core views using jsreport.</Description>
+    <Description>Pdf rendering from asp.net core views using jsreport</Description>
     <PackageProjectUrl>https://jsreport.net</PackageProjectUrl>
     <PackageLicenseUrl>https://www.opensource.org/licenses/mit-license.php</PackageLicenseUrl>
     <PackageIconUrl>https://jsreport.net/img/favicon.ico</PackageIconUrl>
     <Copyright>Copyright 2013-2017 Jan Blaha</Copyright>
-    <PackageTags>jsreport;report;pdf;asp.net;mvc</PackageTags>
-    <RepositoryUrl>https://github.com/jsreport/net</RepositoryUrl>
+    <PackageTags>jsreport;report;pdf;asp.net;core;mvc</PackageTags>
+    <RepositoryUrl>https://github.com/jsreport/jsreport-dotnet</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>Release notes are at https://github.com/jsreport/jsreport-dotnet-mvc/releases</PackageReleaseNotes>
+    <PackageReleaseNotes>Release notes are at https://github.com/jsreport/jsreport-dotnet-aspnetcore/releases</PackageReleaseNotes>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>2.0.0-beta1</Version>
+    <Version>1.0.0-beta1</Version>
   </PropertyGroup>
 
   <ItemGroup>    

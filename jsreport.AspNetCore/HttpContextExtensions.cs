@@ -1,7 +1,7 @@
 ﻿using jsreport.Types;
 using Microsoft.AspNetCore.Http;
 
-namespace jsreport.MVC
+namespace jsreport.AspNetCore
 {
     public static class HttpContextExtensions
     {

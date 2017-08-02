@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\jsreport.MVC\jsreport.MVC.csproj" />
+    <ProjectReference Include="..\jsreport.AspNetCore\jsreport.AspNetCore.csproj" />
   </ItemGroup>
 
   <Choose>
@@ -24,8 +24,7 @@
         <ProjectReference Include="..\..\jsreport-dotnet-shared\jsreport.Shared\jsreport.Shared.csproj" />
         <ProjectReference Include="..\..\jsreport-dotnet-client\jsreport.Client\jsreport.Client.csproj" />
         <ProjectReference Include="..\..\jsreport-dotnet-local\jsreport.Local\jsreport.Local.csproj" />
-        <ProjectReference Include="..\..\jsreport-dotnet-binary\jsreport.Binary\jsreport.Binary.csproj" />
-        <ProjectReference Include="..\..\jsreport-dotnet-mvc\jsreport.MVC\jsreport.MVC.csproj" />
+        <ProjectReference Include="..\..\jsreport-dotnet-binary\jsreport.Binary\jsreport.Binary.csproj" />        
       </ItemGroup>
     </When>
     <Otherwise>

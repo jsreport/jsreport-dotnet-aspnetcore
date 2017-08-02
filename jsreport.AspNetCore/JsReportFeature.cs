@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using System;
 
-namespace jsreport.MVC
+namespace jsreport.AspNetCore
 {
     public interface IJsReportFeature
     {

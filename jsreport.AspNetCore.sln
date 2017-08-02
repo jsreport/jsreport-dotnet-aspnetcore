@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26621.2
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "jsreport.MVC", "jsreport.MVC\jsreport.MVC.csproj", "{1AC0C37A-BA07-4A9A-9B60-AC32D18740C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "jsreport.AspNetCore", "jsreport.AspNetCore\jsreport.AspNetCore.csproj", "{1AC0C37A-BA07-4A9A-9B60-AC32D18740C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jsreport.MVC.Test", "jsreport.MVC.Test\jsreport.MVC.Test.csproj", "{54A036A9-DD54-4A61-B1D6-22B6197D4AE2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jsreport.AspNetCore.Test", "jsreport.AspNetCore.Test\jsreport.AspNetCore.Test.csproj", "{54A036A9-DD54-4A61-B1D6-22B6197D4AE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
