@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -12,6 +11,10 @@
     <PackageReference Include="NUnit3TestAdapter" Version="3.8.0-alpha1" />
     <PackageReference Include="Shouldly" Version="2.8.3" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0-preview2-final" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\jsreport.MVC\jsreport.MVC.csproj" />
   </ItemGroup>
 
   <Choose>
@@ -27,12 +30,11 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <PackageReference Include="jsreport.Types" Version="1.0.0" />
-        <PackageReference Include="jsreport.Client" Version="1.0.0" />
-        <PackageReference Include="jsreport.Shared" Version="1.0.0" />
-        <PackageReference Include="jsreport.Local" Version="1.0.0" />
-        <PackageReference Include="jsreport.Binary" Version="1.0.0" />
-        <PackageReference Include="jsreport.MVC" Version="1.0.0" />
+        <PackageReference Include="jsreport.Types" Version="1.7.0-beta2" />        
+        <PackageReference Include="jsreport.Shared" Version="1.0.0-beta1" />
+        <PackageReference Include="jsreport.Client" Version="2.0.0-beta1" />        
+        <PackageReference Include="jsreport.Local" Version="1.0.0-beta1" />
+        <PackageReference Include="jsreport.Binary" Version="1.7.0-beta1" />        
       </ItemGroup>
     </Otherwise>
   </Choose>

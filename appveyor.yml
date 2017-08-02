@@ -1,0 +1,21 @@
+image: Visual Studio 2017 Preview
+artifacts:
+  - path: '**\jsreport.MVC*.nupkg'
+    name: nuget
+    type: NuGetPackage
+environment:
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+build:
+  project: jsreport.MVC.sln
+before_build:
+  - cmd: dotnet restore
+deploy:
+  provider: NuGet
+  api_key:
+    secure: cm3zn2aDli94+zqlULKlvqQItEfAHHfqpBnUWILfZ8jp+8LjVdIllIH1CPFsXs0B
+  on:
+    appveyor_repo_tag: true
+test_script:
+- cd jsreport.MVC.Test
+- dotnet test    

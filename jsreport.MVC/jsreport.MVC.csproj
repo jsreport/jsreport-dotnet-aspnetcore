@@ -1,22 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>jsreport.MVC</PackageId>
-    <Title>jsreport asp.net mvc integration</Title>
+    <Title>jsreport asp.net core and MVC integration</Title>
     <Authors>Jan Blaha</Authors>
-    <Description>Pdf rendering from asp.net views using jsreport.</Description>
-    <PackageProjectUrl>http://jsreport.net</PackageProjectUrl>
-    <PackageLicenseUrl>http://www.opensource.org/licenses/mit-license.php</PackageLicenseUrl>
-    <PackageIconUrl>http://jsreport.net/img/favicon.ico</PackageIconUrl>
+    <Description>Pdf rendering from asp.net core views using jsreport.</Description>
+    <PackageProjectUrl>https://jsreport.net</PackageProjectUrl>
+    <PackageLicenseUrl>https://www.opensource.org/licenses/mit-license.php</PackageLicenseUrl>
+    <PackageIconUrl>https://jsreport.net/img/favicon.ico</PackageIconUrl>
     <Copyright>Copyright 2013-2017 Jan Blaha</Copyright>
     <PackageTags>jsreport;report;pdf;asp.net;mvc</PackageTags>
     <RepositoryUrl>https://github.com/jsreport/net</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageReleaseNotes>Release notes are at https://github.com/jsreport/jsreport-dotnet-mvc/releases</PackageReleaseNotes>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Version>2.0.0-beta1</Version>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0-preview2-final" />    
+  <ItemGroup>    
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.0.0-preview2-final" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0-preview2-final" />    
   </ItemGroup>
 
   <Choose>
@@ -28,8 +33,8 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <PackageReference Include="jsreport.Types" Version="1.0.0" />
-        <PackageReference Include="jsreport.Shared" Version="1.0.0" />        
+        <PackageReference Include="jsreport.Types" Version="1.7.0-beta2" />
+        <PackageReference Include="jsreport.Shared" Version="1.0.0-beta1" />        
       </ItemGroup>
     </Otherwise>
   </Choose>
