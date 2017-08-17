@@ -4,5 +4,5 @@
 
 This package includes the asp.net core middleware and mvc filters enabling usage of Razor views for rendering reports.
 
-You can find examples and documentation in the [jsreport sdk for .net home page](https://jsreport.net/learn/dotnet-v2).
+You can find examples and documentation in the [jsreport sdk for .net home page](https://jsreport.net/learn/dotnet).
 The general development and contribution instructions can be find in the [jsreport for .net  root repository](https://github.com/jsreport/jsreport-dotnet).
