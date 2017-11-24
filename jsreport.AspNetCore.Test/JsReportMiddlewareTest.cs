@@ -13,6 +13,12 @@ namespace jsreport.AspNetCore.Test
     [TestFixture]
     public class JsReportMiddlewareTest
     {
+        [TearDown]
+        public void TearDown()
+        {
+            new LocalReporting().KillRunningJsReportProcesses().UseBinary(JsReportBinary.GetBinary()).AsUtility().Create();           
+        }
+    
         [Test]
         public async Task BasicTest()
         {            
