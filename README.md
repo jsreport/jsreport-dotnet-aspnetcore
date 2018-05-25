@@ -67,75 +67,180 @@ async Task<(string ContentType, MemoryStream GeneratedFileStream)> GeneratePDFAs
 
 2. Render a view to generate a HTML string
 
-You need to render your view as a HTML string, you may use the following (which can be injected as a scoped service):
+You need to render your view as a HTML string, you may use the [following service](https://gist.github.com/JeanCollas/22154325c6da339d5ac0060f91ea7d53) (which can be injected as a scoped service):
 
 
 ```c#
-public class ViewToStringRendererService
-{
-    private IRazorViewEngine _viewEngine;
-    private ITempDataProvider _tempDataProvider;
-    private IServiceProvider _serviceProvider;
-
-    public ViewToStringRendererService(
-        IRazorViewEngine viewEngine,
-        ITempDataProvider tempDataProvider,
-        IServiceProvider serviceProvider)
+    public class ViewToStringRendererService: ViewExecutor
     {
-        _viewEngine = viewEngine;
-        _tempDataProvider = tempDataProvider;
-        _serviceProvider = serviceProvider;
-    }
+        private ITempDataProvider _tempDataProvider;
+        private IServiceProvider _serviceProvider;
 
-    public async Task<string> RenderViewToStringAsync<TModel>(string name, TModel model)
-    {
-        var actionContext = GetActionContext();
-        var viewEngineResult = _viewEngine.FindView(actionContext, name, false);
-        if (!viewEngineResult.Success)
+        public ViewToStringRendererService(
+            IOptions<MvcViewOptions> viewOptions,
+            IHttpResponseStreamWriterFactory writerFactory,
+            ICompositeViewEngine viewEngine,
+            ITempDataDictionaryFactory tempDataFactory,
+            DiagnosticSource diagnosticSource,
+            IModelMetadataProvider modelMetadataProvider,
+            ITempDataProvider tempDataProvider,
+            IServiceProvider serviceProvider)
+            : base(viewOptions, writerFactory, viewEngine, tempDataFactory, diagnosticSource, modelMetadataProvider)
         {
-            throw new InvalidOperationException(string.Format("Couldn't find view '{0}'", name));
+            _tempDataProvider = tempDataProvider;
+            _serviceProvider = serviceProvider;
         }
 
-        var view = viewEngineResult.View;
-        using (var output = new StringWriter())
+        public async Task<string> RenderViewToStringAsync<TModel>(string viewName, TModel model)
         {
-            var viewContext = new ViewContext(
-                actionContext,
-                view,
-                new ViewDataDictionary<TModel>(
-                    metadataProvider: new EmptyModelMetadataProvider(),
-                    modelState: new ModelStateDictionary())
+            var context = GetActionContext();
+
+            if (context == null) throw new ArgumentNullException(nameof(context));
+
+            var result = new ViewResult()
+            {
+                ViewData = new ViewDataDictionary<TModel>(
+                        metadataProvider: new EmptyModelMetadataProvider(),
+                        modelState: new ModelStateDictionary())
                 {
                     Model = model
                 },
-                new TempDataDictionary(
-                    actionContext.HttpContext,
-                    _tempDataProvider),
-                output,
-                new HtmlHelperOptions());
+                TempData = new TempDataDictionary(
+                        context.HttpContext,
+                        _tempDataProvider),
+                ViewName = viewName,
+            };
 
-            await view.RenderAsync(viewContext);
+            var viewEngineResult = FindView(context, result);
+            viewEngineResult.EnsureSuccessful(originalLocations: null);
 
-            return output.ToString();
+            var view = viewEngineResult.View;
+
+            using (var output = new StringWriter())
+            {
+                var viewContext = new ViewContext(
+                    context,
+                    view,
+                    new ViewDataDictionary<TModel>(
+                        metadataProvider: new EmptyModelMetadataProvider(),
+                        modelState: new ModelStateDictionary())
+                    {
+                        Model = model
+                    },
+                    new TempDataDictionary(
+                        context.HttpContext,
+                        _tempDataProvider),
+                    output,
+                    new HtmlHelperOptions());
+
+                await view.RenderAsync(viewContext);
+
+                return output.ToString();
+            }
         }
+        private ActionContext GetActionContext()
+        {
+            var httpContext = new DefaultHttpContext();
+            httpContext.RequestServices = _serviceProvider;
+            return new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+        }
+
+        /// <summary>
+        /// Attempts to find the <see cref="IView"/> associated with <paramref name="viewResult"/>.
+        /// </summary>
+        /// <param name="actionContext">The <see cref="ActionContext"/> associated with the current request.</param>
+        /// <param name="viewResult">The <see cref="ViewResult"/>.</param>
+        /// <returns>A <see cref="ViewEngineResult"/>.</returns>
+        ViewEngineResult FindView(ActionContext actionContext, ViewResult viewResult)
+        {
+            if (actionContext == null)
+            {
+                throw new ArgumentNullException(nameof(actionContext));
+            }
+
+            if (viewResult == null)
+            {
+                throw new ArgumentNullException(nameof(viewResult));
+            }
+
+            var viewEngine = viewResult.ViewEngine ?? ViewEngine;
+
+            var viewName = viewResult.ViewName ?? GetActionName(actionContext);
+
+            var result = viewEngine.GetView(executingFilePath: null, viewPath: viewName, isMainPage: true);
+            var originalResult = result;
+            if (!result.Success)
+            {
+                result = viewEngine.FindView(actionContext, viewName, isMainPage: true);
+            }
+
+            if (!result.Success)
+            {
+                if (originalResult.SearchedLocations.Any())
+                {
+                    if (result.SearchedLocations.Any())
+                    {
+                        // Return a new ViewEngineResult listing all searched locations.
+                        var locations = new List<string>(originalResult.SearchedLocations);
+                        locations.AddRange(result.SearchedLocations);
+                        result = ViewEngineResult.NotFound(viewName, locations);
+                    }
+                    else
+                    {
+                        // GetView() searched locations but FindView() did not. Use first ViewEngineResult.
+                        result = originalResult;
+                    }
+                }
+            }
+
+            if(!result.Success)
+                throw new InvalidOperationException(string.Format("Couldn't find view '{0}'", viewName));
+
+            return result;
+        }
+
+
+        private const string ActionNameKey = "action";
+        private static string GetActionName(ActionContext context)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            if (!context.RouteData.Values.TryGetValue(ActionNameKey, out var routeValue))
+            {
+                return null;
+            }
+
+            var actionDescriptor = context.ActionDescriptor;
+            string normalizedValue = null;
+            if (actionDescriptor.RouteValues.TryGetValue(ActionNameKey, out var value) &&
+                !string.IsNullOrEmpty(value))
+            {
+                normalizedValue = value;
+            }
+
+            var stringRouteValue = routeValue?.ToString();
+            if (string.Equals(normalizedValue, stringRouteValue, StringComparison.OrdinalIgnoreCase))
+            {
+                return normalizedValue;
+            }
+
+            return stringRouteValue;
+        }
+
     }
-    private ActionContext GetActionContext()
-    {
-        var httpContext = new DefaultHttpContext();
-        httpContext.RequestServices = _serviceProvider;
-        return new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
-    }
-}
+
 ```
 
 3. Call the PDF generator, save/store the file and/or send it
 
-In your controller, supposing the razor cshtml view template to be /Views/Home/PDFTemplate.cshtml you may use the following code.
-Note the relative path and no .cshtml in the view name). 
+In your controller, supposing the razor cshtml view template to be /Views/Home/PDFTemplate.cshtml you may use the following code. 
 This is a not-complete sample as it requires a view, the associated viewmodel and some obvious variables:
 
 ```c#
-var htmlContent = await _ViewToStringRendererService.RenderViewToStringAsync("Home/PDFTemplate", viewModel);
+var htmlContent = await _ViewToStringRendererService.RenderViewToStringAsync("/Views/Home/PDFTemplate.cshtml", viewModel);
 (var contentType, var generatedFile) = await GeneratePDFAsync(htmlContent);
 Response.Headers["Content-Disposition"] = $"attachment; filename=\"{System.Net.WebUtility.UrlEncode(fileName)}\"";
 
