@@ -15,7 +15,7 @@ You can use jsreport .NET SDK if you are in .NET Core 2.0. This includes among o
 
 2. In your Startup.cs configure it as the following
 
-```
+```c#
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddMvc();              
@@ -28,7 +28,7 @@ public void ConfigureServices(IServiceCollection services)
 
 3. Then you need to add MiddlewareFilter attribute to the particular action and specify which conversion you want to use. In this case html to pdf conversion.
 
-```
+```c#
 [MiddlewareFilter(typeof(JsReportPipeline))]
 public IActionResult Invoice()
 {
@@ -45,7 +45,7 @@ In order to generate dynamic PDF files as byte arrays, you may use the following
 
 1. Use the library to generate the PDF from a HTML string
 
-```
+```c#
 /// Generate a PDF from a html string
 async Task<(string ContentType, MemoryStream GeneratedFileStream)> GeneratePDFAsync(string htmlContent)
 {
@@ -66,7 +66,7 @@ async Task<(string ContentType, MemoryStream GeneratedFileStream)> GeneratePDFAs
 You need to render your view as a HTML string, you may use the following (which can be injected as a scoped service):
 
 
-```
+```c#
 public class ViewToStringRendererService
 {
     private IRazorViewEngine _viewEngine;
@@ -130,7 +130,7 @@ In your controller, supposing the razor cshtml view template to be /Views/Home/P
 Note the relative path and no .cshtml in the view name). 
 This is a not-complete sample as it requires a view, the associated viewmodel and some obvious variables:
 
-```
+```c#
 var htmlContent = await _ViewToStringRendererService.RenderViewToStringAsync("Home/PDFTemplate", viewModel);
 (var contentType, var generatedFile) = await GeneratePDFAsync(htmlContent);
 Response.Headers["Content-Disposition"] = $"attachment; filename=\"{System.Net.WebUtility.UrlEncode(fileName)}\"";
