@@ -7,8 +7,8 @@ This package includes the asp.net core middleware and mvc filters enabling usage
 You can find examples and documentation in the [jsreport sdk for .net home page](https://jsreport.net/learn/dotnet).
 The general development and contribution instructions can be find in the [jsreport for .net  root repository](https://github.com/jsreport/jsreport-dotnet).
 
-### Quick starters
-#### The middleware
+## Quick starters
+### The middleware
 You can use jsreport .NET SDK if you are in .NET Core 2.0. This includes among other features filters to convert your existing razor views into pdf. 
 
 1. Install nugets [jsreport.Binary](https://www.nuget.org/packages/jsreport.Binary/), [jsreport.Local](https://www.nuget.org/packages/jsreport.Local/) and [jsreport.AspNetCore](https://www.nuget.org/packages/jsreport.AspNetCore/)
@@ -38,7 +38,7 @@ public IActionResult Invoice()
 ```
 You can reach bunch of other options for headers, footers or page layout on JsReportFeature(). Note that the same way you can also produce excel files from html. See more information in the [documentation](https://jsreport.net/learn/dotnet-aspnetcore).
 
-#### Generate a file
+### Generate a file
 
 In some cases, you may want more flexible way of handling the generated PDF data, such as sending the PDF file by email. 
 In order to generate dynamic PDF files as byte arrays, you may use the following.
