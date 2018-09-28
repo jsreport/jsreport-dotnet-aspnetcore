@@ -1,4 +1,4 @@
-image: Visual Studio 2017 Preview
+image: Visual Studio 2017
 artifacts:
   - path: '**\jsreport.AspNetCore*.nupkg'
     name: nuget
@@ -13,7 +13,7 @@ before_build:
 deploy:
   provider: NuGet
   api_key:
-    secure: cm3zn2aDli94+zqlULKlvqQItEfAHHfqpBnUWILfZ8jp+8LjVdIllIH1CPFsXs0B
+    secure: Ok6nZu8obJRRE9qRHzNrQ9/B+rzXMCq3Bm3PYwkRvrKKksANcUbhZij+lTmVbUHL
   on:
     appveyor_repo_tag: true
 test_script:
