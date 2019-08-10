@@ -21,8 +21,8 @@
   </PropertyGroup>
 
   <ItemGroup>    
-    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.1" />    
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />    
   </ItemGroup>
 
   <Choose>
@@ -34,7 +34,7 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <PackageReference Include="jsreport.Types" Version="2.2.7" />
+        <PackageReference Include="jsreport.Types" Version="2.4.1" />
         <PackageReference Include="jsreport.Shared" Version="2.0.1" />        
       </ItemGroup>
     </Otherwise>

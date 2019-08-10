@@ -1,5 +1,6 @@
 ﻿using jsreport.Shared;
 using jsreport.Types;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
@@ -67,6 +68,12 @@ namespace jsreport.AspNetCore
             using (var sw = new StringWriter())
             {
                 var viewResult = ((IRazorViewEngine)context.RequestServices.GetService(typeof(IRazorViewEngine))).FindView(actionContext, viewName, false);
+
+                if (viewResult.View == null)
+                {
+                    var hostingEnv = context.RequestServices.GetService(typeof(IHostingEnvironment)) as IHostingEnvironment;
+                    viewResult = ((IRazorViewEngine)context.RequestServices.GetService(typeof(IRazorViewEngine))).GetView(hostingEnv.WebRootPath, viewName, false);
+                }
 
                 if (viewResult.View == null)
                 {
