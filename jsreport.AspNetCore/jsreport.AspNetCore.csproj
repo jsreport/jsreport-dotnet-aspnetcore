@@ -1,47 +1,47 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netcoreapp3.0</TargetFrameworks>
-    <PackageId>jsreport.AspNetCore</PackageId>
-    <Title>jsreport asp.net core and MVC integration</Title>
-    <Authors>Jan Blaha</Authors>
-    <Description>Pdf rendering from asp.net core views using jsreport</Description>
-    <PackageProjectUrl>https://jsreport.net</PackageProjectUrl>
-    <PackageLicenseUrl>https://www.opensource.org/licenses/mit-license.php</PackageLicenseUrl>
-    <PackageIconUrl>https://jsreport.net/img/favicon.ico</PackageIconUrl>
-    <Copyright>Copyright 2013-2020 Jan Blaha</Copyright>
-    <PackageTags>jsreport;report;pdf;asp.net;core;mvc</PackageTags>
-    <RepositoryUrl>https://github.com/jsreport/jsreport-dotnet</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>Release notes are at https://github.com/jsreport/jsreport-dotnet-aspnetcore/releases</PackageReleaseNotes>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>2.1.0</Version>
-    <AssemblyVersion>2.1.0.0</AssemblyVersion>
+	<TargetFrameworks>netstandard2.1;netcoreapp3.1</TargetFrameworks>
+	<PackageId>jsreport.AspNetCore</PackageId>
+	<Title>jsreport asp.net core and MVC integration</Title>
+	<Authors>Jan Blaha</Authors>
+	<Description>Pdf rendering from asp.net core views using jsreport</Description>
+	<PackageProjectUrl>https://jsreport.net</PackageProjectUrl>
+	<PackageLicenseUrl>https://www.opensource.org/licenses/mit-license.php</PackageLicenseUrl>
+	<PackageIconUrl>https://jsreport.net/img/favicon.ico</PackageIconUrl>
+	<Copyright>Copyright 2013-2020 Jan Blaha</Copyright>
+	<PackageTags>jsreport;report;pdf;asp.net;core;mvc</PackageTags>
+	<RepositoryUrl>https://github.com/jsreport/jsreport-dotnet</RepositoryUrl>
+	<RepositoryType>git</RepositoryType>
+	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	<PackageReleaseNotes>Release notes are at https://github.com/jsreport/jsreport-dotnet-aspnetcore/releases</PackageReleaseNotes>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<Version>2.1.0</Version>
+	<AssemblyVersion>2.1.0.0</AssemblyVersion>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">    
-    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />    
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.1'">
+	<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+	<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.0'">
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
+	<FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
   <Choose>
-    <When Condition=" '$(SolutionName)' == 'jsreport.development' ">
-      <ItemGroup>
-        <ProjectReference Include="..\..\jsreport-dotnet-types\jsreport.Types\jsreport.Types.csproj" />        
-        <ProjectReference Include="..\..\jsreport-dotnet-shared\jsreport.Shared\jsreport.Shared.csproj" />
-      </ItemGroup>
-    </When>
-    <Otherwise>
-      <ItemGroup>
-        <PackageReference Include="jsreport.Types" Version="2.4.1" />
-        <PackageReference Include="jsreport.Shared" Version="2.0.1" />        
-      </ItemGroup>
-    </Otherwise>
+	<When Condition=" '$(SolutionName)' == 'jsreport.development' ">
+	  <ItemGroup>
+		<ProjectReference Include="..\..\jsreport-dotnet-types\jsreport.Types\jsreport.Types.csproj" />
+		<ProjectReference Include="..\..\jsreport-dotnet-shared\jsreport.Shared\jsreport.Shared.csproj" />
+	  </ItemGroup>
+	</When>
+	<Otherwise>
+	  <ItemGroup>
+		<PackageReference Include="jsreport.Types" Version="2.4.1" />
+		<PackageReference Include="jsreport.Shared" Version="2.0.1" />
+	  </ItemGroup>
+	</Otherwise>
   </Choose>
 
 </Project>
