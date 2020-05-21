@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFrameworks>netstandard2.1;netcoreapp3.1</TargetFrameworks>
+	<TargetFrameworks>netstandard2.0;netcoreapp3.1</TargetFrameworks>
 	<PackageId>jsreport.AspNetCore</PackageId>
 	<Title>jsreport asp.net core and MVC integration</Title>
 	<Authors>Jan Blaha</Authors>
@@ -20,7 +20,7 @@
 	<AssemblyVersion>2.1.0.0</AssemblyVersion>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.1'">
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
 	<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
 	<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
   </ItemGroup>

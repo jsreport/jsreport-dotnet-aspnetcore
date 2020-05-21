@@ -53,43 +53,44 @@ namespace jsreport.AspNetCore
 		{
 			var actionContext = new ActionContext(context, routeData, new ActionDescriptor());
 
-			using var sw = new StringWriter();
-
-			if (!(context.RequestServices.GetService(typeof(IRazorViewEngine)) is IRazorViewEngine razorViewEngine))
+			using (var sw = new StringWriter())
 			{
-				throw new ArgumentNullException($"RazorViewEngine service not found. Add services.AddRazorPages() in ConfigureServices method.");
+				if (!(context.RequestServices.GetService(typeof(IRazorViewEngine)) is IRazorViewEngine razorViewEngine))
+				{
+					throw new ArgumentNullException($"RazorViewEngine service not found. Add services.AddRazorPages() in ConfigureServices method.");
+				}
+
+				var viewResult = razorViewEngine.FindView(actionContext, viewName, false);
+
+				if (viewResult.View == null)
+				{
+					var hostingEnv = context.RequestServices.GetService(typeof(IHostingEnvironment)) as IHostingEnvironment;
+					viewResult = razorViewEngine.GetView(hostingEnv.WebRootPath, viewName, false);
+				}
+
+				if (viewResult.View == null)
+				{
+					throw new ArgumentNullException($"{viewName} does not match any available view");
+				}
+
+				var viewDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())
+				{
+					Model = model
+				};
+
+				var viewContext = new ViewContext(
+					actionContext,
+					viewResult.View,
+					viewDictionary,
+					new TempDataDictionary(actionContext.HttpContext, (ITempDataProvider)context.RequestServices.GetService(typeof(ITempDataProvider))),
+					sw,
+					new HtmlHelperOptions()
+				);
+
+				await viewResult.View.RenderAsync(viewContext);
+
+				return sw.ToString();
 			}
-
-			var viewResult = razorViewEngine.FindView(actionContext, viewName, false);
-
-			if (viewResult.View == null)
-			{
-				var hostingEnv = context.RequestServices.GetService(typeof(IHostingEnvironment)) as IHostingEnvironment;
-				viewResult = razorViewEngine.GetView(hostingEnv.WebRootPath, viewName, false);
-			}
-
-			if (viewResult.View == null)
-			{
-				throw new ArgumentNullException($"{viewName} does not match any available view");
-			}
-
-			var viewDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())
-			{
-				Model = model
-			};
-
-			var viewContext = new ViewContext(
-				actionContext,
-				viewResult.View,
-				viewDictionary,
-				new TempDataDictionary(actionContext.HttpContext, ((ITempDataProvider)context.RequestServices.GetService(typeof(ITempDataProvider)))),
-				sw,
-				new HtmlHelperOptions()
-			);
-
-			await viewResult.View.RenderAsync(viewContext);
-
-			return sw.ToString();
 		}
 	}
 }
