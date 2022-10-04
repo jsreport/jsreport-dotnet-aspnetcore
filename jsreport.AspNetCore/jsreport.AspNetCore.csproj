@@ -9,15 +9,16 @@
 	<PackageProjectUrl>https://jsreport.net</PackageProjectUrl>
 	<PackageLicenseUrl>https://www.opensource.org/licenses/mit-license.php</PackageLicenseUrl>
 	<PackageIconUrl>https://jsreport.net/img/favicon.ico</PackageIconUrl>
-	<Copyright>Copyright 2013-2020 Jan Blaha</Copyright>
+	<Copyright>Copyright 2013-2022 Jan Blaha</Copyright>
 	<PackageTags>jsreport;report;pdf;asp.net;core;mvc</PackageTags>
 	<RepositoryUrl>https://github.com/jsreport/jsreport-dotnet</RepositoryUrl>
 	<RepositoryType>git</RepositoryType>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageReleaseNotes>Release notes are at https://github.com/jsreport/jsreport-dotnet-aspnetcore/releases</PackageReleaseNotes>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
-	<Version>2.1.0</Version>
-	<AssemblyVersion>2.1.0.0</AssemblyVersion>
+	<Version>3.8.0</Version>
+	<AssemblyVersion>3.8.0.0</AssemblyVersion>
+	<PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
@@ -29,6 +30,13 @@
 	<FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
   <Choose>
 	<When Condition=" '$(SolutionName)' == 'jsreport.development' ">
 	  <ItemGroup>
@@ -38,8 +46,8 @@
 	</When>
 	<Otherwise>
 	  <ItemGroup>
-		<PackageReference Include="jsreport.Types" Version="2.4.1" />
-		<PackageReference Include="jsreport.Shared" Version="2.0.1" />
+		<PackageReference Include="jsreport.Types" Version="3.8.1" />
+		<PackageReference Include="jsreport.Shared" Version="3.8.0" />
 	  </ItemGroup>
 	</Otherwise>
   </Choose>

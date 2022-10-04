@@ -1,18 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
-    <PackageReference Include="NUnit" Version="3.12.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.0" />
+    <PackageReference Include="NUnit" Version="3.13.3" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.2.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Shouldly" Version="3.0.2" />
+    <PackageReference Include="Shouldly" Version="4.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,11 +31,11 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <PackageReference Include="jsreport.Types" Version="2.7.0" />        
-        <PackageReference Include="jsreport.Shared" Version="2.1.0" />
-        <PackageReference Include="jsreport.Client" Version="3.0.1" />        
-        <PackageReference Include="jsreport.Local" Version="2.2.2" />
-        <PackageReference Include="jsreport.Binary" Version="2.7.1" />        
+        <PackageReference Include="jsreport.Types" Version="3.8.1" />        
+        <PackageReference Include="jsreport.Shared" Version="3.8.0" />
+        <PackageReference Include="jsreport.Client" Version="3.8.0" />        
+        <PackageReference Include="jsreport.Local" Version="3.8.0" />
+        <PackageReference Include="jsreport.Binary" Version="3.8.0" />        
       </ItemGroup>
     </Otherwise>
   </Choose>
