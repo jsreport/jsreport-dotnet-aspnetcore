@@ -9,15 +9,15 @@
 	<PackageProjectUrl>https://jsreport.net</PackageProjectUrl>
 	<PackageLicenseUrl>https://www.opensource.org/licenses/mit-license.php</PackageLicenseUrl>
 	<PackageIconUrl>https://jsreport.net/img/favicon.ico</PackageIconUrl>
-	<Copyright>Copyright 2013-2022 Jan Blaha</Copyright>
+	<Copyright>Copyright 2013-2024 Jan Blaha</Copyright>
 	<PackageTags>jsreport;report;pdf;asp.net;core;mvc</PackageTags>
 	<RepositoryUrl>https://github.com/jsreport/jsreport-dotnet</RepositoryUrl>
 	<RepositoryType>git</RepositoryType>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageReleaseNotes>Release notes are at https://github.com/jsreport/jsreport-dotnet-aspnetcore/releases</PackageReleaseNotes>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
-	<Version>3.8.0</Version>
-	<AssemblyVersion>3.8.0.0</AssemblyVersion>
+	<Version>3.8.1</Version>
+	<AssemblyVersion>3.8.1.0</AssemblyVersion>
 	<PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
@@ -46,8 +46,8 @@
 	</When>
 	<Otherwise>
 	  <ItemGroup>
-		<PackageReference Include="jsreport.Types" Version="3.8.1" />
-		<PackageReference Include="jsreport.Shared" Version="3.8.0" />
+		<PackageReference Include="jsreport.Types" Version="3.9.4" />
+		<PackageReference Include="jsreport.Shared" Version="3.8.2" />
 	  </ItemGroup>
 	</Otherwise>
   </Choose>
