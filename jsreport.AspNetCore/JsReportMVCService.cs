@@ -26,7 +26,7 @@ namespace jsreport.AspNetCore
 			=> _renderService = rs;
 
 		public Task<Report> RenderAsync(RenderRequest request, CancellationToken ct = default)
-			=> _renderService.RenderAsync(request);
+			=> _renderService.RenderAsync(request, ct);
 
 		public Task<Report> RenderAsync(string templateShortid, object data, CancellationToken ct = default)
 			=> _renderService.RenderAsync(templateShortid, data, ct);
